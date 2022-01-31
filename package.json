@@ -54,7 +54,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "RTS Encryption Manager",
+            "name": "RTS-Encryption-Manager",
             "description": "Simple and Portable Key Management Software",
             "loadingGif": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/245.gif",
             "iconUrl": "https://raw.githubusercontent.com/Tech-Slayers/RTS-Encryption-Manager/dev/renderer/img/icon.ico",
