@@ -73,6 +73,12 @@
             "title": "RTS Encryption Manager",
             "icon": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.icns",
             "background": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/background@2x.png",
+            "window": {
+              "size": {
+                "width": 660,
+                "height": 480
+              }
+            },
             "contents": [
               {
                 "x": 396,
