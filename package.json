@@ -47,7 +47,7 @@
     "forge": {
       "packagerConfig": {
         "name": "rts-em",
-        "executableName": "rts-em",
+        "executableName": "RTS Encryption Manager",
         "icon": "./renderer/img/icon"
       },
       "makers": [
