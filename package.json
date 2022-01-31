@@ -93,6 +93,7 @@
           "name": "@electron-forge/maker-deb",
           "config": {
             "productName": "RTS Encryption Manager",
+            "genericName": "RTS Encryption Manager",
             "description": "Simple and Portable Key Management Software",
             "icon": "/home/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.png"
           }
@@ -101,6 +102,7 @@
           "name": "@electron-forge/maker-rpm",
           "config": {
             "productName": "RTS Encryption Manager",
+            "genericName": "RTS Encryption Manager",
             "description": "Simple and Portable Key Management Software",
             "icon": "/home/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.png"
           }
