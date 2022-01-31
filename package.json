@@ -1,7 +1,7 @@
 {
   "name": "rts-em",
   "productName": "RTS Encryption Manager",
-  "version": "1.4.5",
+  "version": "1.4.4",
   "description": "Simple and Portable Key Management Software",
   "repository": "tech-slayers/rts-encryption-manager",
   "author": "AustinCasteel <austin@techslayers.com>",
@@ -46,15 +46,15 @@
   "config": {
     "forge": {
       "packagerConfig": {
-        "name": "RTS Encryption Manager",
-        "executableName": "RTS Encryption Manager",
+        "name": "rts-em",
+        "executableName": "rts-em",
         "icon": "./renderer/img/icon"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "RTS-Encryption-Manager",
+            "name": "RTS Encryption Manager",
             "description": "Simple and Portable Key Management Software",
             "loadingGif": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/245.gif",
             "iconUrl": "https://raw.githubusercontent.com/Tech-Slayers/RTS-Encryption-Manager/dev/renderer/img/icon.ico",
