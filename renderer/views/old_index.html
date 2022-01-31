@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>Desktop GPG!</title>
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h2>Desktop GPG!</h2>
+    </div>
+    <nav class="navbar">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="./keys.html" target="_blank"
+            >Add or Import Keys</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <hr />
+    <div class="container-fluid">
+      <h4>Select existing or upload Temporary Private Key:</h4>
+      <div class="form-row">
+        <div class="col align-self-center">
+          <label for="sel-key">Stored keys:</label><br />
+          <select id="sel-keys"></select
+          ><br />
+          <button id="btn-export-key">Export Public Key</button>
+        </div>
+        <div class="col align-self-center">
+          <label for="file-key">Import from file:</label>
+          <input type="file" id="file-key" />
+          <button id="btn-import-key">Import Private Key</button>
+        </div>
+      </div>
+      <hr />
+      <div class="form-row">
+        <div class="col">
+          <label for="txt-passphrase">Please enter key password:</label>
+          <input
+            type="password"
+            id="txt-passphrase"
+            placeholder="Secured Key Password"
+            required
+          />
+        </div>
+      </div>
+      <hr />
+      <h4>Decryption:</h4>
+      <div class="container">
+        <fieldset class="form-row">
+          <div class="col align-self-center">
+            <label for="file-encrypted">Encrypted file:</label>
+            <input type="file" id="file-encrypted" />
+            <label for="encrypted">Encrypted Message:</label><br />
+            <textarea
+              rows="5"
+              cols="30"
+              name="encrypted"
+              id="encrypted"
+            ></textarea>
+          </div>
+          <div class="col align-self-center">
+            <button id="btn-decrypt">&gt;&gt;</button>
+          </div>
+          <div class="col">
+            <label for="file-encrypted">Plain file:</label><br />
+            <button id="btn-show">View</button>
+            <button id="btn-save">Save</button
+            ><iframe id="iframe" hidden></iframe><br />
+            <label for="decrypted">Plain Message:</label><br />
+            <textarea
+              rows="5"
+              cols="30"
+              name="decrypted"
+              id="decrypted"
+            ></textarea>
+          </div>
+        </fieldset>
+      </div>
+      <hr />
+      <!-- <h2>Encryption:</h2>
+      <div class="container">
+        <fieldset class="form-row">
+          <div class="col">
+            <label for="txt-public-key">Public Key: </label><br />
+            <textarea
+              rows="5"
+              cols="auto"
+              name="public-key"
+              id="txt-public-key"
+            ></textarea>
+          </div>
+          <div class="col">
+            <label for="encrypted">Plain Message: </label><br />
+            <textarea
+              rows="5"
+              cols="auto"
+              name="encrypted"
+              id="encrypted"
+            ></textarea>
+          </div>
+          <div class="col justify-content-center align-items-center">
+            <button>&gt;&gt;</button>
+          </div>
+          <div class="col">
+            <label for="decrypted">Encrypted Message: </label><br />
+            <textarea
+              rows="5"
+              cols="auto"
+              name="decrypted"
+              id="decrypted"
+            ></textarea>
+          </div>
+        </fieldset>
+      </div> -->
+    </div>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/index.js"></script>
+    <!-- You can also require other files to run in this process -->
+    <script src="../renderer.js"></script>
+  </body>
+</html>

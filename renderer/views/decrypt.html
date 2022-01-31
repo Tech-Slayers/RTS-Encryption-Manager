@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>RTS EM - Decrypt Files</title>
+    <link id="theme" rel="stylesheet" media="all" href="../css/themes/faltly/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <button class="btn btn-primary" type="button" id="SEF-cancel-btn">Back</button>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+    <div class="container-fluid">
+      <h4>Select Private Key:</h4>
+      <div class="row">
+        <div class="col align-self-center text-center">
+          <div class="form-group">
+            <label for="sel-key" class="form-label mt-4">Stored keys:</label>
+            <select class="form-select" id="sel-keys"></select>
+          </div>
+        </div>
+        <div id="pw1" class="col align-self-center text-center">
+          <div class="form-group">
+            <label for="txt-passphrase">Please enter key password:</label>
+            <input class="form-control"
+              type="password"
+              id="txt-passphrase"
+              placeholder="Secured Key Password"
+              required
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <hr />
+    <div id="pw2" class="container-fluid">
+      <h4>Decryption:</h4>
+      <div class="row">
+        <div class="col-lg-4 align-self-center text-center">
+          <div class="form-group">
+            <label for="file-encrypted">Encrypted file:</label>
+            <input type="file" id="file-encrypted" />
+          </div>
+        </div>
+        <div class="col-lg-4 align-self-center text-center">
+          <div class="form-group">
+            <button class="btn btn-primary btn-lg" id="btn-decrypt">Decrypt</button>
+            <img src="../img/245.gif" loop=infinite id="processing">
+          </div>
+        </div>
+        <div id="save-dec-section" class="col-lg-4 align-self-center text-center">
+          <div class="form-group">
+            <label>Decrypted file:</label><br />
+            <button class="btn btn-success" id="btn-save">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Button Control-->
+    <input id="encrypt-btn-clicked" type="file" accept="" hidden />
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/decrypt.js"></script>
+  </body>
+</html> 

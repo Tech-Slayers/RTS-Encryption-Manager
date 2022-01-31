@@ -1,0 +1,70 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>RTS EM - Encrypt VPN Config</title>
+    <link id="theme" rel="stylesheet" media="all" href="../css/themes/faltly/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <button class="btn btn-primary" type="button" id="SEF-cancel-btn">Back</button>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+    <div id="fs" class="container-fluid">
+      <h4>VPN Config Encryption:</h4>
+      <div class="row">
+        <p>Please provide your VPN information.</p>
+        <div class="col-lg-6 align-self-center text-center">
+          <label for="vpn-un" class="form-label">Please enter your vpn username: </label>
+          <input class="form-control"
+            type="text"
+            name="full-name"
+            id="vpn-un"
+            placeholder="VPN Username"
+            required
+          /><br />
+          <label for="vpn-pw" class="form-label">Please enter your vpn password: </label>
+          <input class="form-control"
+            type="password"
+            name="full-name"
+            id="vpn-pw"
+            placeholder="VPN Password"
+            required
+          /><br />
+          <label for="vpn-config">Please paste your vpn config: </label><br />
+          <textarea 
+            class="form-control"
+            rows="5"
+            cols="30"
+            id="vpn-config"
+            placeholder="VPN Config"
+            required
+          ></textarea>
+        </div>
+        <div class="col-lg-6 align-self-center text-center">
+          <button class="btn btn-primary btn-lg" id="btn-gen-zip">Generate & Save Config</button>
+        </div>
+      </div>
+    </div>
+    <!-- Button Control-->
+    <br /><br /><br /><br />
+    <input id="encrypt-btn-clicked" type="file" accept="" hidden />
+    <select class="form-control" id="sel-keys2" hidden></select>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/vpn.js"></script>
+    <script src="../js/FileSaver.js"></script>
+    <script src="../js/jszip.js"></script>
+  </body>
+</html>

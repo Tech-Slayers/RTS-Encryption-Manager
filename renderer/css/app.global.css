@@ -1,0 +1,43 @@
+/*@import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'; */
+/* @import './themes/cerulean/bootstrap.min.css';
+@import './themes/cosmo/bootstrap.min.css';
+@import './themes/cyborg/bootstrap.min.css';
+@import './themes/darkly/bootstrap.min.css';
+@import './themes/default/bootstrap.min.css';
+@import './themes/flatly/bootstrap.min.css';
+@import './themes/journal/bootstrap.min.css';
+@import './themes/litera/bootstrap.min.css';
+@import './themes/lumen/bootstrap.min.css';
+@import './themes/lux/bootstrap.min.css';
+@import './themes/materia/bootstrap.min.css';
+@import './themes/minty/bootstrap.min.css';
+@import './themes/morph/bootstrap.min.css';
+@import './themes/pulse/bootstrap.min.css';
+@import './themes/quartz/bootstrap.min.css';
+@import './themes/regent/bootstrap.min.css';
+@import './themes/sandstone/bootstrap.min.css';
+@import './themes/simplex/bootstrap.min.css';
+@import './themes/sketchy/bootstrap.min.css';
+@import './themes/slate/bootstrap.min.css';
+@import './themes/solar/bootstrap.min.css';
+@import './themes/spacelab/bootstrap.min.css';
+@import './themes/superhero/bootstrap.min.css';
+@import './themes/united/bootstrap.min.css';
+@import './themes/vapor/bootstrap.min.css';
+@import './themes/yeti/bootstrap.min.css';
+@import './themes/zephyr/bootstrap.min.css'; */
+
+.line-vertical {
+    width: 1px;
+    height: 34px !important;
+    float: left;
+    background-color: black;
+    margin: 10px;
+}
+.line-vertical-hidden {
+    width: 1px;
+    height: 34px !important;
+    float: left;
+    background-color: #00000000;
+    margin: 10px;
+}

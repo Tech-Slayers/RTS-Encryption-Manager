@@ -1,0 +1,122 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>RTS EM - New Key Pair</title>
+    <link id="theme" rel="stylesheet" media="all" href="../css/themes/faltly/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <button class="btn btn-primary" type="button" id="SEF-cancel-btn">Back</button>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+    <div id="fs" class="container-fluid">
+      <h4 id="1-1">Generate New Key Pair:</h4>
+      <div id="1-2" class="row">
+        <form class="requires-validation" novalidate>
+          <div class="col-lg-12 align-self-center text-center">
+            <label for="txt-full-name" class="form-label">Please enter full name: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="txt-full-name"
+              placeholder="FirstLast"
+              required
+            /><div class="invalid-feedback">Invalid Name</div><br />
+            <label for="txt-email"class="form-label">Please enter email: </label>
+            <input class="form-control"
+              type="email"
+              name="email"
+              id="txt-email"
+              placeholder="name@example.com"
+              required
+            /><div class="invalid-feedback">Invalid Email</div><br />
+            <label for="txt-passphrase" class="form-label">Please enter passphrase: </label>
+            <input class="form-control"
+              type="password"
+              id="txt-passphrase"
+              placeholder="Secured Key Password"
+              required
+            /><div class="invalid-feedback">Invalid Password</div><br />
+            <div class="form-check form-check-inline">
+              <input checked class="form-check-input" type="radio" name='key-type' id="rad-ECC" value="ecc">
+              <label class="form-check-label" for="rad-ECC">ECC</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name='key-type' id="rad-RSA" value="rsa">
+              <label class="form-check-label" for="rad-RSA">RSA</label>
+            </div>
+            <button id="btn-generate-key" class="btn btn-primary" type="submit">Generate Keys</button>
+          </div>
+        </form>
+      </div>
+      <h4 id="2-1">Generate New Key Pair:</h4>
+      <div id="2-2" class="row">
+        <div class="col-lg-4 align-self-center text-center">
+          <label for="txt-pvt-key" class="form-label">Private Key: </label><br />
+          <textarea class="form-control"
+            rows="5"
+            cols="auto"
+            name="private-key"
+            id="txt-pvt-key"
+            placeholder="Generated/Imported key here"
+          ></textarea>
+          <br>
+          <button class="btn btn-primary" id="private-cpy-btn">Copy Private Key</button>
+        </div>
+        <div class="col-lg-4 align-self-center text-center">
+          <label for="txt-pub-key" class="form-label">Public Key: </label><br />
+          <textarea class="form-control"
+            rows="5"
+            cols="auto"
+            name="public-key"
+            id="txt-pub-key"
+            placeholder="Generated/Imported key here"
+          ></textarea>
+          <br>
+          <button class="btn btn-primary" id="public-cpy-btn">Copy Public Key</button>
+        </div>
+        <div class="col-lg-4 align-self-center text-center">
+          <label for="txt-fingerprint" class="form-label">Fingerprint: </label><br />
+          <textarea class="form-control"
+            rows="5"
+            cols="auto"
+            name="fingerprint"
+            id="txt-fingerprint"
+            placeholder="Generated/Imported fingerprint here"
+          ></textarea>
+          <br>
+          <button class="btn btn-primary" id="fingerprint-cpy-btn">Copy Fingerprint</button>
+        </div>
+      </div>
+      <div id="2-3" class="row">
+        <p>Please select the zip file you just saved in the previous step. This will take the file and encrypt it. Once you have the encrypted file, upload it on your RTS Portal</p>
+        <br /><br /><br /><br />
+        <div class="col-lg-12 align-self-center text-center">
+          <input class="form-check-input" type="checkbox" value="" id="pvt-key-include">
+          <label class="form-check-label" for="pvt-key-include">
+            Would you like your private key included in the save?
+          </label>
+          <br />
+          <button class="btn btn-success btn-mar-top" id="generated-save-btn">Save Generated Keys</button>
+        </div>
+      </div>
+    </div>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/new_pair.js"></script>
+    <script src="../js/FileSaver.js"></script>
+    <script src="../js/jszip.js"></script>
+  </body>
+</html> 

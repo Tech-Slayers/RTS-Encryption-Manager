@@ -1,0 +1,123 @@
+{
+  "name": "rts-em",
+  "productName": "RTS Encryption Manager",
+  "version": "1.4.4",
+  "description": "Simple and Portable Key Management Software",
+  "repository": "tech-slayers/rts-encryption-manager",
+  "author": "AustinCasteel <austin@techslayers.com>",
+  "license": "MIT",
+  "keywords": [
+    "Electron",
+    "GPG",
+    "Security"
+  ],
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "publish": "electron-forge publish",
+    "make": "electron-forge make",
+    "makea": "electron-forge make --platform darwin && electron-forge make --platform linux && electron-forge make --platform win32",
+    "makem": "electron-forge make --platform mas",
+    "makew32": "electron-forge make --platform win32 --arch ia32"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.54",
+    "@electron-forge/publisher-github": "^6.0.0-beta.54",
+    "electron": "^12.0.0"
+  },
+  "dependencies": {
+    "adm-zip": "^0.5.9",
+    "axios": "^0.24.0",
+    "bootstrap": "^4.6.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-util": "^0.14.2",
+    "fs-extra": "^9.1.0",
+    "jquery": "^3.6.0",
+    "openpgp": "5.0.0-1",
+    "popper.js": "^1.16.1",
+    "update-electron-app": "^2.0.1"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "name": "rts-em",
+        "executableName": "rts-em",
+        "icon": "./renderer/img/icon"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "RTS Encryption Manager",
+            "description": "Simple and Portable Key Management Software",
+            "loadingGif": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/245.gif",
+            "iconUrl": "https://raw.githubusercontent.com/Tech-Slayers/RTS-Encryption-Manager/dev/renderer/img/icon.ico",
+            "setupIcon": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.ico"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "title": "RTS Encryption Manager",
+            "icon": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.icns",
+            "background": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/background@2x.png",
+            "contents": [
+              {
+                "x": 396,
+                "y": 345,
+                "type": "link",
+                "path": "/Applications"
+              },
+              {
+                "x": 396,
+                "y": 110,
+                "type": "file",
+                "path": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/out/rts-em-darwin-x64/rts-em.app"
+              }
+            ]
+          }
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {
+            "productName": "RTS Encryption Manager",
+            "description": "Simple and Portable Key Management Software",
+            "icon": "/home/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.png"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {
+            "productName": "RTS Encryption Manager",
+            "description": "Simple and Portable Key Management Software",
+            "icon": "/home/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.png"
+          }
+        }
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "tech-slayers",
+              "name": "RTS-Encryption-Manager",
+              "draft": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}

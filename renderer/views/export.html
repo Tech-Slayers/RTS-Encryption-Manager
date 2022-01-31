@@ -1,0 +1,52 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>RTS EM - Export Keys</title>
+    <link id="theme" rel="stylesheet" media="all" href="../css/themes/faltly/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <button class="btn btn-primary" type="button" id="SEF-cancel-btn">Back</button>
+        </div>
+      </div>
+    </nav>
+    <br /><br />
+    <div class="container-fluid">
+      <h4>Select existing Key to Export:</h4>
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="form-group">
+            <label for="sel-key" class="form-label mt-4">Stored keys:</label>
+            <select class="form-select" id="sel-keys"></select>
+          </div>
+        </div>
+        <div class="col-lg-6 align-self-center">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">Key information</h4>
+              <h6 class="card-subtitle mb-2 text-muted" id="txt-key-email"></h6>
+              <p class="card-text" id="txt-key-fp"></p>
+              <a href="#" class="card-link" id="btn-export-pub-key">Export Public Key</a>
+              <a href="#" class="card-link" id="btn-export-pvt-key">Export Private Key</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Button Control-->
+    <input id="encrypt-btn-clicked" type="file" accept="" hidden />
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/export.js"></script>
+  </body>
+</html>

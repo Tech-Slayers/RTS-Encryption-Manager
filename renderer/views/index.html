@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>RTS Encryption Manager</title>
+    <link id="theme" rel="stylesheet" media="all" href="../css/themes/faltly/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarColor02">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="encrypt-btn-main">Encrypt</button>
+            </li>
+            <hr class="line-vertical-hidden"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="decrypt-btn-main">Decrypt</button>
+            </li>
+            <hr class="line-vertical"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="new_pair-btn-main">New Key Pair</button>
+            </li>
+            <hr class="line-vertical-hidden"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="import-btn-main">Import</button>
+            </li>
+            <hr class="line-vertical-hidden"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="export-btn-main">Export</button>
+            </li>
+            <!-- <hr class="line-vertical"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#vpnAPIModal">Encrypt VPN Config</button>
+            </li>
+            <hr class="line-vertical-hidden"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#sshAPIModal">Encrypt SSH Config</button>
+            </li> -->
+            <hr class="line-vertical"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="vpn-btn-main">Encrypt VPN Config</button>
+            </li>
+            <hr class="line-vertical-hidden"/>
+            <li class="nav-item">
+              <button class="btn btn-primary" type="button" id="ssh-btn-main">Encrypt SSH Config</button>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <select id="themeselect" class="form-select" aria-label="Default select example">
+              <option selected>Theme...</option>
+              <option value="cerulean">Cerulean</option>
+              <option value="cosmo">Cosmo</option>
+              <option value="cyborg">Cyborg</option>
+              <option value="darkly">Darkly</option>
+              <option value="flatly">Flatly</option>
+              <option value="journal">Journal</option>
+              <option value="litera">Litera</option>
+              <option value="lumen">Lumen</option>
+              <option value="lux">Lux</option>
+              <option value="materia">Materia</option>
+              <option value="minty">Minty</option>
+              <option value="morph">Morph</option>
+              <option value="pulse">Pulse</option>
+              <option value="quartz">Quartz</option>
+              <option value="regent">Regent</option>
+              <option value="sandstone">Sandstone</option>
+              <option value="simplex">Simplex</option>
+              <option value="sketchy">Sketchy</option>
+              <option value="slate">Slate</option>
+              <option value="solar">Solar</option>
+              <option value="spacelab">Spacelab</option>
+              <option value="superhero">Superhero</option>
+              <option value="united">United</option>
+              <option value="vapor">Vapor</option>
+              <option value="yeti">Yeti</option>
+              <option value="zephyr">Zephyr</option>
+            </select>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <h3>Welcome to RTS Encryption Manager</h3>
+      <p>Preview stored keys...</p>
+    </div>
+    <br /><br />
+    <!--  -->
+    <div class="container-fluid">
+      <div class="row">
+      <div class="col-lg-6 align-self-center">
+        <div class="form-group">
+        <label for="sel-key" class="form-label mt-4">Stored keys:</label>
+        <select class="form-select" id="sel-keys"></select>
+        </div>
+      </div>
+      <div class="col-lg-6 align-self-center">
+        <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Key information</h4>
+          <h6 class="card-subtitle mb-2 text-muted" id="txt-key-email"></h6>
+          <p class="card-text" id="txt-key-fp"></p>
+        </div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <br /><br />
+    <div class="modal fade" id="vpnAPIModal" tabindex="-1" role="dialog" aria-labelledby="vpnAPIModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="vpnAPIModalLongTitle">VPN Config Setup</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            In order to use the VPN configuration feature, you must provide an API key.
+          </div>
+          <div id="input_internal" class="modal-body">
+            <div class="form-row">
+              <label for="txt-api-key-internal" class="form-label">Please enter your given API key: </label>
+              <input class="form-control"
+              type="text"
+              name="api-key"
+              id="txt-api-key-internal"
+              placeholder="00000000-0000-0000-0000-000000000000"
+              required
+              /><br />
+            </div>
+          </div>
+          <div id="processing_internal" class="modal-body">
+            <div class="form-row">
+              <img src="../img/245.gif" loop=infinite>
+            </div>
+          </div>
+          <div class="modal-body">
+            *This feature is exclusively for TechSlayers Red Team Suite customers
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="vpn-btn-main">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="sshAPIModal" tabindex="-1" role="dialog" aria-labelledby="sshAPIModalTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="sshAPIModalLongTitle">SSH Config Setup</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            In order to use the SSH configuration feature, you must provide an API key.
+          </div>
+          <div id="input_local" class="modal-body">
+            <div class="form-row">
+              <label for="txt-api-key-local" class="form-label">Please enter your given API key: </label>
+              <input class="form-control"
+              type="text"
+              name="api-key"
+              id="txt-api-key-local"
+              placeholder="00000000-0000-0000-0000-000000000000"
+              required
+              /><br />
+            </div>
+          </div>
+          <div id="processing_local" class="modal-body">
+            <div class="form-row">
+              <img src="../img/245.gif" loop=infinite>
+            </div>
+          </div>
+          <div class="modal-body">
+            *This feature is exclusively for TechSlayers Red Team Suite customers
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="ssh-btn-main">Proceed</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <label for="ts-org-key" class="form-label">Please enter your organization key: </label> -->
+    <!-- <input class="form-control"
+      type="text"
+      name="full-name"
+      id="ts-org-key"
+      placeholder="Organization Key"
+      required
+      hidden
+    /><br /> -->
+    <!-- Button Control-->
+    <input id="encrypt-btn-clicked" type="file" accept="" hidden />
+    <input id="decrypt-btn-clicked" type="file" accept="" hidden />
+    <input id="import-btn-clicked" type="file" accept="" hidden />
+    <!-- Modal Control-->
+    <div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="importModalLabel">Import Keys</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="file-loading">
+              <label for="file-pvt-key" class="form-label">Private key: </label>
+              <input id="file-pvt-key" name="pvt-key" multiple type="file"/>
+            </div>
+            <div id="pvt-key-errors"></div>
+          </div>
+          <div class="modal-body">
+            <div class="file-loading">
+              <label for="file-pub-key" class="form-label">Public key: </label>
+              <input id="file-pub-key" name="pub-key" multiple type="file"/>
+            </div>
+            <div id="pub-key-errors"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button id="btn-import-key" type="button" class="btn btn-primary" title="import key" data-dismiss="modal">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Keys Management</title>
+    <link rel="stylesheet" href="../css/app.global.css" />
+  </head>
+  <body>
+    <div class="container-fluid">
+      <h2>Key Management</h2>
+    </div>
+    <hr />
+    <form class="container-fluid" name="crypto">
+      <h4>Import from file:</h4>
+      <div class="form-row">
+        <div class="col">
+          <label for="file-pvt-key">Private key: </label>
+          <input type="file" id="file-pvt-key" /><br />
+          <label for="file-pub-key">Public key: </label>
+          <input type="file" id="file-pub-key" /><br />
+          <button id="btn-import-key">Import Keys</button>
+        </div>
+      </div>
+      <hr />
+      <h4>Armored ASCII Keys:</h4>
+      <div class="form-row">
+        <div class="col">
+          <label for="txt-pvt-key">Private Key: </label><br />
+          <textarea
+            rows="5"
+            cols="auto"
+            name="private-key"
+            id="txt-pvt-key"
+            placeholder="Generated/Imported key here"
+          ></textarea>
+          <br>
+          <button id="private-cpy-btn">Copy Private Key</button>
+        </div>
+        <div class="col">
+          <label for="txt-pub-key">Public Key: </label><br />
+          <textarea
+            rows="5"
+            cols="auto"
+            name="public-key"
+            id="txt-pub-key"
+            placeholder="Generated/Imported key here"
+          ></textarea>
+          <br>
+          <button id="public-cpy-btn">Copy Public Key</button>
+        </div>
+        <div class="col">
+          <label for="txt-fingerprint">Fingerprint: </label><br />
+          <textarea
+            rows="5"
+            cols="auto"
+            name="fingerprint"
+            id="txt-fingerprint"
+            placeholder="Generated/Imported fingerprint here"
+          ></textarea>
+          <br>
+          <button id="fingerprint-cpy-btn">Copy Fingerprint</button>
+        </div>
+      </div>
+      <hr />
+      <h4>Generate New Key:</h4>
+      <div class="form-row">
+        <div class="col">
+          <label for="txt-full-name">Please enter full name: </label>
+          <input type="text" name="full-name" id="txt-full-name" /><br />
+          <label for="txt-email">Please enter email: </label>
+          <input
+            type="email"
+            name="email"
+            id="txt-email"
+            placeholder="name@example.com"
+          /><br />
+          <label for="txt-passphrase">Please enter passphrase: </label>
+          <input
+            type="password"
+            id="txt-passphrase"
+            placeholder="Secured Key Password"
+            required
+          /><br />
+          <input
+            type="radio"
+            name="key-type"
+            id="rad-ECC"
+            value="ecc"
+            checked
+          />
+          <label for="chk-RSA">ECC</label>
+          <input type="radio" name="key-type" id="rad-RSA" value="rsa" />
+          <label for="chk-RSA">RSA</label><br />
+          <button id="btn-generate-key">Generate Keys</button>
+        </div>
+      </div>
+      <hr />
+    </form>
+    <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/keys.js"></script>
+  </body>
+</html>
