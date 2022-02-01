@@ -118,6 +118,37 @@ $("#btn-decrypt").on("click", function (e) {
   }
 });
 
+$("#btn-gen").on("click", function (e) {
+  e.preventDefault();
+  const keyFile =
+    savedKeys.find((key) => key.name == $("#sel-keys").val());
+  if (!keyFile) {
+    alert("Please select a private key from the list");
+    return;
+  }
+  const keyType = getKeyType(keyFile);
+  if (keyType < 0) {
+    alert(
+      "Unknown key file format. Please use *.key for binary or *.asc for armored ASCII"
+    );
+    return;
+  }
+  const passphrase = $("#txt-passphrase").val();
+  if (!passphrase) {
+    alert("Please enter the key password");
+    return;
+  }
+  const encFile = document.getElementById("file-encrypted").files[0];
+  if (encFile) {
+    window.api
+      .decryptFile(keyFile.path, keyType == 0, passphrase, encFile.path)
+      .catch(alert);
+  } else {
+    alert("Please provide an encrypted file to decrypt");
+    return;
+  }
+});
+
 // $("#btn-show").on("click", function (e) {
 //   e.preventDefault();
 

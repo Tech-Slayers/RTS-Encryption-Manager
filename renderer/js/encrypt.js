@@ -1,7 +1,7 @@
 $("#SEF-cancel-btn").on("click", function () {
   window.location.replace("./index.html");
 });
-
+ 
 $("#save-enc-section").removeAttr("style").hide();
 $("#pw").removeAttr("style").hide();
 $("#processing").removeAttr("style").hide();
@@ -69,6 +69,24 @@ $("#btn-encrypt").on("click", function (e) {
       .catch(alert);
   } else {
     encryptWithKey(keyFile);
+  }
+});
+
+$("#btn-gen").on("click", function (e) {
+  e.preventDefault();
+
+  let keyFile =
+    savedKeys.find((key) => key.name == $("#sel-keys").val());
+  if (new RegExp("private|pvt").test(keyFile.name)) {
+    window.api
+      .findPublicKey(keyFile.name)
+      .then((k) => {
+        console.log(k);
+        encryptWithKey2(k);
+      })
+      .catch(alert);
+  } else {
+    encryptWithKey2(keyFile);
   }
 });
 
@@ -142,6 +160,51 @@ function encryptWithKey(keyFile) {
     alert("Please provide an plain file or paste in text box");
     return;
   }
+}
+
+function encryptWithKey2(keyFile) {
+  if (!keyFile) {
+    alert("Please select a public key from the list");
+    return;
+  }
+  console.log(keyFile);
+
+  const keyType = getKeyType(keyFile);
+  if (keyType < 0) {
+    alert(
+      "Unknown key file format. Please use *.key for binary or *.asc for armored ASCII"
+    );
+    return;
+  }
+
+  const plainFile = document.getElementById("file-plain").files[0];
+  if (plainFile) {
+    window.api
+      .encryptFile(keyFile.path, keyType == 0, plainFile.path)
+      .catch(alert);
+    // window.api.crypto
+    //   .encryptFile(keyFile.path, keyType == 0, plainFile.path)
+    //   .then((encryptedMessage) => {
+    //     console.log(encryptedMessage);
+    //     lastEncryptedMessage = encryptedMessage;
+    //     alert("File was encrypted successfully. Remember to Save it!");
+    //     $("#save-enc-section").show();
+    //     $("#processing").removeAttr("style").hide();
+    //     $("#btn-encrypt").show();
+    //   })
+    //   .catch(alert);
+    // return;
+  } else {
+    alert("Please provide an file to encrypt");
+    return;
+  }
+
+  // window.api
+  //   .writeVpn(vpnUN, vpnPW, vpnConfig, keyFile.path, keyType == 0)
+  //   // .then(() => {
+  //   //   alert('The Encrypted file was saved to your documents as "EncryptedConfig.zip.gpg"');
+  //   // })
+  //   .catch(alert);
 }
 
 function getKeyType(keyFile) {

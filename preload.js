@@ -37,6 +37,12 @@ contextBridge.exposeInMainWorld("api", {
   // writeOrg: (key) => {
   //   return ipcRenderer.invoke("app:on-ts-add", key);
   // },
+  encryptFile: (keyFilePath, isBinary, filePlain) => {
+    return ipcRenderer.invoke("app:on-encryptfile", keyFilePath, isBinary, filePlain);
+  },
+  decryptFile: (keyFilePath, isBinary, passphrase, fileEncrypted) => {
+    return ipcRenderer.invoke("app:on-decryptfile", keyFilePath, isBinary, passphrase, fileEncrypted);
+  },
   writeOrgInt: (apiKey) => {
     return ipcRenderer.invoke("app:on-ts-add-int", apiKey);
   },

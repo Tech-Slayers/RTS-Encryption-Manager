@@ -37,23 +37,12 @@
     <div class="container-fluid">
       <h4>Encryption:</h4>
       <div class="row">
-        <div class="col-lg-4 align-self-center text-center">
-          <div class="form-group">
-            <label for="file-plain">Plain file:</label>
+        <div class="col-lg-6 align-self-center text-center">
+          <label for="file-plain">File to be encrypted:</label>
             <input type="file" id="file-plain" />
-          </div>
         </div>
-        <div class="col-lg-4 align-self-center text-center">
-          <div class="form-group">
-            <button class="btn btn-primary btn-lg" id="btn-encrypt">Encrypt</button>
-            <img src="../img/245.gif" loop=infinite id="processing">
-          </div>
-        </div>
-        <div id="save-enc-section" class="col-lg-4 align-self-center text-center">
-          <div class="form-group">
-            <label>Encrypted file:</label><br />
-            <button class="btn btn-success" id="btn-save-enc">Save</button>
-          </div>
+        <div class="col-lg-6 align-self-center text-center">
+          <button class="btn btn-primary btn-lg" id="btn-gen">Encrypt & Save File</button>
         </div>
       </div>
     </div>
@@ -63,4 +52,4 @@
     <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/encrypt.js"></script>
   </body>
-</html>
+</html> 

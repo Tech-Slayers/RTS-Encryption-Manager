@@ -75,6 +75,14 @@ ipcMain.handle("app:on-ssh-add", (event, username, password, ip, key, path, type
 //   io.addOrg(key);
 // });
 // 
+ipcMain.handle("app:on-encryptfile", (event, keyFilePath, isBinary, filePlain) => {
+  return io.encryptFile(keyFilePath, isBinary, filePlain);
+});
+// 
+ipcMain.handle("app:on-decryptfile", (event, keyFilePath, isBinary, passphrase, fileEncrypted) => {
+  return io.decryptFile(keyFilePath, isBinary, passphrase, fileEncrypted);
+});
+// 
 ipcMain.handle("app:on-ts-add-int", (event, apiKey) => {
   return io.addOrgInt(apiKey);
 });

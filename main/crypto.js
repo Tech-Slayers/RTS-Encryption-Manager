@@ -45,22 +45,29 @@ module.exports = {
     return openpgp.decrypt({ message, privateKeys: privateKey });
   },
 
+  // decryptFile: async (keyFilePath, isBinary, passphrase, fileEncrypted) => {
+  //   const privateKey = await readKeyFile(keyFilePath, isBinary);
+  //   await privateKey.decrypt(passphrase);
+  //   console.log("after privateKey");
+
+  //   console.log(fileEncrypted);
+  //   // const encryptedData = fs.createReadStream(fileEncrypted);
+  //   // const message = await openpgp.Message.fromBinary(encryptedData);
+  //   // return message.decrypt([privateKey]);
+  //   const binaryMessage = fs.readFileSync(fileEncrypted);
+  //   const message = await openpgp.readMessage({ binaryMessage });
+  //   console.log("Binary:");
+  //   console.log(binaryMessage);
+  //   console.log("Message:");
+  //   console.log(message);
+  //   console.log("Almost there");
+  //   return openpgp.decrypt({ message, privateKeys: privateKey, format: 'binary' });
+  // },
   decryptFile: async (keyFilePath, isBinary, passphrase, fileEncrypted) => {
     const privateKey = await readKeyFile(keyFilePath, isBinary);
     await privateKey.decrypt(passphrase);
-    console.log("after privateKey");
-
-    console.log(fileEncrypted);
-    // const encryptedData = fs.createReadStream(fileEncrypted);
-    // const message = await openpgp.Message.fromBinary(encryptedData);
-    // return message.decrypt([privateKey]);
     const binaryMessage = fs.readFileSync(fileEncrypted);
     const message = await openpgp.readMessage({ binaryMessage });
-    console.log("Binary:");
-    console.log(binaryMessage);
-    console.log("Message:");
-    console.log(message);
-    console.log("Almost there");
     return openpgp.decrypt({ message, privateKeys: privateKey, format: 'binary' });
   },
 };

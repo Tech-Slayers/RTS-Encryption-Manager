@@ -49,6 +49,58 @@ exports.addKey = (name, private, public) => {
   notification.filesAdded(2);
 };
 
+exports.encryptFile = (keyFilePath, isBinary, filePlain) => {
+  let lastEncryptedMessage;
+  var filename = path.basename(filePlain)
+  crypto.encryptFile(keyFilePath, isBinary, filePlain)
+        .then((encryptedMessage) => {
+          console.log(encryptedMessage);
+          lastEncryptedMessage = encryptedMessage;
+          const filePath = app.getPath('documents') + '/'+filename+'.gpg';
+          let options = {
+            defaultPath: filePath,
+            title: "Save Encrypted File",
+            buttonLabel: "Save File",
+            filters:[
+              {name: 'OpenPGP Encrypted File', extensions: ['gpg', 'pgp']}
+            ]
+          }
+          dialog.showSaveDialog(options).then((result) => {
+            fs.writeFile(result.filePath, lastEncryptedMessage, (err) => {
+            });
+          }).catch((err) => {
+            console.log(err);
+            dialog.showErrorBox("app", "Unable to find encrypted file.");
+          });
+        })
+};
+
+exports.decryptFile = (keyFilePath, isBinary, passphrase, fileEncrypted) => {
+  let lastPlainMessage;
+  var orgfilename = path.basename(fileEncrypted)
+  var filename = orgfilename.slice(0, -4);
+  crypto.decryptFile(keyFilePath, isBinary, passphrase, fileEncrypted)
+        .then((plainFile) => {
+          lastPlainMessage = plainFile;
+          const filePath = app.getPath('documents') + '/'+filename;
+          let options = {
+            defaultPath: filePath,
+            title: "Save Decrypted File",
+            buttonLabel: "Save File",
+            filters:[
+              {name: 'All Files', extensions: ['*']}
+            ]
+          }
+          dialog.showSaveDialog(options).then((result) => {
+            fs.writeFile(result.filePath, lastPlainMessage.data, (err) => {
+            });
+          }).catch((err) => {
+            console.log(err);
+            dialog.showErrorBox("app", "Unable to find decrypted file.");
+          });
+        })
+};
+
 exports.addVpn = (username, password, config, path, type) => {
   let lastEncryptedMessage;
   var zipName = "config.zip"

@@ -122,7 +122,7 @@ $("#btn-save-enc").on("click", function (e) {
   element.download = lastEncryptedMessage.path ?? "EncryptedConfig.zip.gpg";
   element.click();
 });
- 
+
 function encryptWithKey2(keyFile) {
   let vpnUN = $("#vpn-un").val();
   let vpnPW = $("#vpn-pw").val();
