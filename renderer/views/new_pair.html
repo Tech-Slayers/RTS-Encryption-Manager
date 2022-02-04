@@ -24,7 +24,7 @@
     <div id="fs" class="container-fluid">
       <h4 id="1-1">Generate New Key Pair:</h4>
       <div id="1-2" class="row">
-        <form class="requires-validation" novalidate>
+        <form class="requires-validation">
           <div class="col-lg-12 align-self-center text-center">
             <label for="txt-full-name" class="form-label">Please enter full name: </label>
             <input class="form-control"
@@ -32,23 +32,20 @@
               name="full-name"
               id="txt-full-name"
               placeholder="FirstLast"
-              required
-            /><div class="invalid-feedback">Invalid Name</div><br />
+            /><br />
             <label for="txt-email"class="form-label">Please enter email: </label>
             <input class="form-control"
               type="email"
               name="email"
               id="txt-email"
               placeholder="name@example.com"
-              required
             /><div class="invalid-feedback">Invalid Email</div><br />
             <label for="txt-passphrase" class="form-label">Please enter passphrase: </label>
             <input class="form-control"
               type="password"
               id="txt-passphrase"
               placeholder="Secured Key Password"
-              required
-            /><div class="invalid-feedback">Invalid Password</div><br />
+            /><br />
             <div class="form-check form-check-inline">
               <input checked class="form-check-input" type="radio" name='key-type' id="rad-ECC" value="ecc">
               <label class="form-check-label" for="rad-ECC">ECC</label>

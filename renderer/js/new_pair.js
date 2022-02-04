@@ -30,6 +30,18 @@ $("#btn-generate-key").on("click", function (e) {
   const userName = $("#txt-full-name").val();
   const userEmail = $("#txt-email").val();
   const keyType = $("input[name='key-type']:checked").val();
+  if (userEmail.length == 0) {
+    console.log("nothing")
+  } else if (userEmail.length >= 1) {
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (userEmail.match(mailformat)) {
+      console.log("matches")
+    } else {
+      console.log("does not match")
+      $("#txt-email").addClass("is-invalid")
+      return;
+    }
+  }
   if (keyType == "ecc") {
     window.api.key
       .generateECC(passphrase, userName, userEmail)

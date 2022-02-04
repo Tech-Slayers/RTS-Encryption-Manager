@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, Menu, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu} = require("electron");
 const { openUrlMenuItem, openNewGitHubIssue, debugInfo, showAboutWindow } = require('electron-util');
 const path = require("path");
 const fs = require('fs');
