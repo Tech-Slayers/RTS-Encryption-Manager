@@ -45,7 +45,7 @@ $("#btn-generate-key").on("click", function (e) {
         $("#txt-pvt-key").val(privateKeyArmored2);
         $("#txt-pub-key").val(publicKeyArmored2);
         const fpr = toHex(key.keyPacket.fingerprint).toUpperCase();
-        const ffpr = "Fingerprint: " + fpr.slice(0, 4) + ' ' + fpr.slice(4, 8) + ' ' + fpr.slice(8, 12) + ' ' + fpr.slice(12, 16) + ' ' + fpr.slice(16, 20) + ' ' + fpr.slice(20, 24) + ' ' + fpr.slice(24, 28) + ' ' + fpr.slice(28, 32) + ' ' + fpr.slice(32, 36) + ' ' + fpr.slice(36);
+        const ffpr = fpr.slice(0, 4) + ' ' + fpr.slice(4, 8) + ' ' + fpr.slice(8, 12) + ' ' + fpr.slice(12, 16) + ' ' + fpr.slice(16, 20) + ' ' + fpr.slice(20, 24) + ' ' + fpr.slice(24, 28) + ' ' + fpr.slice(28, 32) + ' ' + fpr.slice(32, 36) + ' ' + fpr.slice(36);
         $("#txt-fingerprint").val(ffpr);
       });
   } else {
