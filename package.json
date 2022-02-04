@@ -1,7 +1,7 @@
 {
   "name": "rts-em",
   "productName": "RTS Encryption Manager",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "Simple and Portable Key Management Software",
   "repository": "tech-slayers/rts-encryption-manager",
   "author": "AustinCasteel <austin@techslayers.com>",
