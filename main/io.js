@@ -184,7 +184,7 @@ exports.addSsh = (username, password, ip, key, path, type) => {
 
 exports.addOrgInt = (apiKey) => {
   const key = apiKey;
-  return axios.get('https://vpn-config-api.herokuapp.com/api/v1/material/internal', {
+  return axios.get('https://rts-em.csdsuite.com/api/v1/material/internal', {
     headers: {
       'Content-Type': 'application/json',
       //'X-API-Key': key
@@ -244,7 +244,7 @@ exports.addOrgInt = (apiKey) => {
 
 exports.addOrgLoc = (apiKey) => {
   const key = apiKey;
-  return axios.get('https://vpn-config-api.herokuapp.com/api/v1/material/local', {
+  return axios.get('https://rts-em.csdsuite.com/api/v1/material/local', {
     headers: {
       'Content-Type': 'application/json',
       //'X-API-Key': key
