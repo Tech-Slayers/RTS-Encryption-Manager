@@ -101,13 +101,20 @@ exports.decryptFile = (keyFilePath, isBinary, passphrase, fileEncrypted) => {
         })
 };
 
-exports.addVpn = (username, password, config, path, type) => {
+exports.addVpn = (vpns, username, password, input1, input2, path, type) => {
   let lastEncryptedMessage;
   var zipName = "config.zip"
   var zipLoc = tsDir
   var zipWrite = (zipLoc + "\\" + zipName);
   var nl = "\n"
-  var com = username+nl+password+nl+config
+  if (vpns == "ovpn") {
+    var block = "[ovpn]"
+    var com = username+block+password+block+input1+nl+input2
+  }
+  if (vpns == "ipsec") {
+    var block = "[ipsec]"
+    var com = username+block+password+block+input1+block+input2
+  }
   var zip = new AdmZip();
   zip.addFile("config.txt", Buffer.from(com, "utf8"), "");
   zip.writeZip(zipWrite);

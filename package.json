@@ -32,6 +32,7 @@
     "electron": "^12.0.0"
   },
   "dependencies": {
+    "@electron-forge/plugin-electronegativity": "^6.0.0-beta.63",
     "adm-zip": "^0.5.9",
     "axios": "^0.24.0",
     "bootstrap": "^4.6.0",
@@ -45,6 +46,11 @@
   },
   "config": {
     "forge": {
+      "plugins": [
+        ["@electron-forge/plugin-electronegativity", {
+            "isSarif": true
+        }]
+      ],
       "packagerConfig": {
         "name": "rts-em",
         "executableName": "rts-em",

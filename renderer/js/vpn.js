@@ -7,6 +7,59 @@ $("#save-enc-section").removeAttr("style").hide();
 $("#pw").removeAttr("style").hide();
 $("#processing").removeAttr("style").hide();
 
+
+$("#OpenVPN").removeAttr("style").hide();
+$("#IPSec").removeAttr("style").hide();
+// $("#btn-gen-zip").removeAttr("style").hide();
+
+
+$(document).ready(function(){
+  $('#vpnSelect').on('change', function() {
+    if ( this.value == 'ovpn') {
+      $("#IPSec").removeAttr("style").hide();
+      $("#OpenVPN").show();
+      console.log("OpenVPN selected")
+    } else if( this.value == 'ipsec') {
+      $("#OpenVPN").removeAttr("style").hide();
+      $("#IPSec").show();
+      console.log("IPSec selected")
+    } else {
+      $("#OpenVPN").removeAttr("style").hide();
+      $("#IPSec").removeAttr("style").hide();
+      console.log("Nothing selected")
+    }
+  });
+});
+
+// $(document).ready(function(){
+//   if ($('#ovpn-config') == "") {
+//     console.log("btn hidden 1")
+//     $("#btn-gen-zip").removeAttr("style").hide();
+//   } else if ($('#OpenVPN').style.display != "none" && $('#ovpn-config') != "") {
+//     console.log("btn shown 1")
+//     $("#btn-gen-zip").show();
+//   }
+// });
+
+// $(document).ready(function(){
+//   if ($('#ipsec-un') == "") {
+//     console.log("btn hidden 2")
+//     $("#btn-gen-zip").removeAttr("style").hide();
+//   } else if ($('#ipsec-pw') == "") {
+//     console.log("btn hidden 3")
+//     $("#btn-gen-zip").removeAttr("style").hide();
+//   } else if ($('#ipsec-psk') == "") {
+//     console.log("btn hidden 4")
+//     $("#btn-gen-zip").removeAttr("style").hide();
+//   } else if ($('#ipsec-ip') == "") {
+//     console.log("btn hidden 5")
+//     $("#btn-gen-zip").removeAttr("style").hide();
+//   } else if ($('#IPSec').style.display != "none" && $('#ipsec-un') != "" && $('#ipsec-pw') != "" && $('#ipsec-psk') != "" && $('#ipsec-ip') != "") {
+//     console.log("btn shown 2")
+//     $("#btn-gen-zip").show();
+//   }
+// });
+
 $("#sel-keys")
   .on("change", () => {
     const keyFile =
@@ -74,7 +127,7 @@ $("#btn-encrypt").on("click", function (e) {
 });
 
 $("#btn-gen-zip").on("click", function (e) {
-  e.preventDefault();
+  // e.preventDefault();
 
   let keyFile =
     savedKeys2.find((key) => key.name == $("#sel-keys2").val());
@@ -83,11 +136,33 @@ $("#btn-gen-zip").on("click", function (e) {
       .findPublicKey2(keyFile.name)
       .then((k) => {
         console.log(k);
-        encryptWithKey2(k);
+        if ($("#vpnSelect").val() == "ovpn") {
+          encryptWithKey3(k);
+          const element = document.createElement("a");
+          element.focus();
+        } else if ($("#vpnSelect").val() == "ipsec") {
+          encryptWithKey2(k);
+          const element = document.createElement("a");
+          element.focus();
+        } else {
+          alert("VPN Type not found");
+          return;
+        }
       })
       .catch(alert);
   } else {
-    encryptWithKey2(keyFile);
+    if ($("#vpnSelect").val() == "ovpn") {
+      encryptWithKey3(keyFile);
+      const element = document.createElement("a");
+      element.focus();
+    } else if ($("#vpnSelect").val() == "ipsec") {
+      encryptWithKey2(keyFile);
+      const element = document.createElement("a");
+      element.focus();
+    } else {
+      alert("VPN Type not found");
+      return;
+    }
   }
 });
 
@@ -123,29 +198,18 @@ $("#btn-save-enc").on("click", function (e) {
   element.click();
 });
 
-function encryptWithKey2(keyFile) {
-  let vpnUN = $("#vpn-un").val();
-  let vpnPW = $("#vpn-pw").val();
-  let vpnConfig = $("#vpn-config").val();
-
-  // if (vpnUN == "") {
-  //   alert(
-  //     "Username is required"
-  //   );
-  //   return;
-  // }
-  // if (vpnPW == "") {
-  //   alert(
-  //     "Password is required"
-  //   );
-  //   return;
-  // }
-  if (vpnConfig == "") {
-    alert(
-      "Config is required"
-    );
-    return;
-  }
+function encryptWithKey3(keyFile) {
+  let vpns = $("#vpnSelect").val();
+  console.log(vpns)
+  let option1 = $("#ovpn-un").val();
+  console.log(option1)
+  let option2 = $("#ovpn-pw").val();
+  console.log(option2)
+  let option3 = $("#ovpn-pp").val();
+  console.log(option3)
+  let option4 = $("#ovpn-config").val();
+  console.log(option4)
+  var validating = false;
 
   if (!keyFile) {
     alert("Please select a public key from list or import from file");
@@ -160,12 +224,94 @@ function encryptWithKey2(keyFile) {
     );
     return;
   }
+
+  if (option4 == "") {
+    alert(
+      "Config is required"
+    );
+    setTimeout(function(){
+      $("#ovpn-config").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
   window.api
-    .writeVpn(vpnUN, vpnPW, vpnConfig, keyFile.path, keyType == 0)
-    // .then(() => {
-    //   alert('The Encrypted file was saved to your documents as "EncryptedConfig.zip.gpg"');
-    // })
-    .catch(alert);
+  .writeVpn(vpns, option1, option2, option3, option4, keyFile.path, keyType == 0)
+  .catch(alert);
+}
+
+function encryptWithKey2(keyFile) {
+  let vpns = $("#vpnSelect").val();
+  console.log(vpns)
+  let option1 = $("#ipsec-un").val();
+  console.log(option1)
+  let option2 = $("#ipsec-pw").val();
+  console.log(option2)
+  let option3 = $("#ipsec-psk").val();
+  console.log(option3)
+  let option4 = $("#ipsec-ip").val();
+  console.log(option4)
+  var validating = false;
+
+  if (!keyFile) {
+    alert("Please select a public key from list or import from file");
+    return;
+  }
+  console.log(keyFile);
+
+  const keyType = getKeyType(keyFile);
+  if (keyType < 0) {
+    alert(
+      "Unknown key file format. Please use *.key for binary or *.asc for armored ASCII"
+    );
+    return;
+  }
+  
+  if (option1 == "") {
+    alert(
+      "Username is required"
+    );
+    setTimeout(function(){
+      $("#ipsec-un").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+  if (option2 == "") {
+    alert(
+      "Password is required"
+    );
+    setTimeout(function(){
+      $("#ipsec-pw").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+  if (option3 == "") {
+    alert(
+      "Private Key Passphrase is required"
+    );
+    setTimeout(function(){
+      $("#ipsec-psk").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+  if (option4 == "") {
+    alert(
+      "IP is required"
+    );
+    setTimeout(function(){
+      $("#ipsec-ip").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
+  window.api
+  .writeVpn(vpns, option1, option2, option3, option4, keyFile.path, keyType == 0)
+  .catch(alert);
 }
 
 function encryptWithKey(keyFile) {
@@ -265,6 +411,7 @@ function fileToKey(file) {
 
 let savedKeys = [];
 let savedKeys2 = [];
+let vpns;
 let lastPlainMessage;
 let lastEncryptedMessage;
 

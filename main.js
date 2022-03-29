@@ -63,8 +63,8 @@ ipcMain.handle("app:on-key-add", (event, name, private, public) => {
   io.addKey(name, private, public);
 });
 // 
-ipcMain.handle("app:on-vpn-add", (event, username, password, config, path, type) => {
-  io.addVpn(username, password, config, path, type);
+ipcMain.handle("app:on-vpn-add", (event, vpns, username, password, input1, input2, path, type) => {
+  io.addVpn(vpns, username, password, input1, input2, path, type);
 });
 // 
 ipcMain.handle("app:on-ssh-add", (event, username, password, ip, key, path, type) => {
