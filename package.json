@@ -24,11 +24,11 @@
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-snap": "^6.0.0-beta.54",
+    "@davidwinter/electron-forge-maker-snap": "^2.0.7",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
-    "@electron-forge/maker-dmg": "^6.0.0-beta.54",
     "@electron-forge/publisher-github": "^6.0.0-beta.54",
     "electron": "^12.0.0"
   },
@@ -113,8 +113,11 @@
           }
         },
         {
-          "name": "@electron-forge/maker-snap",
+          "name": "@davidwinter/electron-forge-maker-snap",
           "config": {
+            "applicationName": "RTS Encryption Manager",
+            "description": "Simple and Portable Key Management Software",
+            "icon": "/home/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.png"
           }
         }
       ],
