@@ -15,24 +15,23 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "publish": "electron-forge publish",
     "make": "electron-forge make",
     "makea": "electron-forge make --platform darwin && electron-forge make --platform linux && electron-forge make --platform win32",
     "makem": "electron-forge make --platform mas",
     "makew32": "electron-forge make --platform win32 --arch ia32",
-    "build:package": "electron-packager . rts-em --out=out",
-    "build:snap": "electron-installer-snap --src=out/rts-em-linux-x64"
+    "publish": "electron-forge publish"
   },
   "devDependencies": {
+    "@davidwinter/electron-forge-maker-snap": "^0.7.1",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-dmg": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-snap": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron-forge/publisher-github": "^6.0.0-beta.54",
-    "electron": "^12.0.0",
-    "electron-installer-snap": "^5.1.0"
+    "electron": "^12.0.0"
   },
   "dependencies": {
     "adm-zip": "^0.5.9",
@@ -49,21 +48,13 @@
   "config": {
     "forge": {
       "packagerConfig": {
+        "appCopyright": "Copyright 2022 Techslayers, LLC.\n\nLicensed under MIT.",
         "name": "rts-em",
         "executableName": "rts-em",
-        "icon": "./renderer/img/icon"
+        "icon": "./renderer/img/icon",
+        "appCategoryType": "public.app-category.utilities"
       },
       "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "RTS-Encryption-Manager",
-            "description": "Simple and Portable Key Management Software",
-            "loadingGif": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/245.gif",
-            "iconUrl": "https://raw.githubusercontent.com/Tech-Slayers/RTS-Encryption-Manager/dev/renderer/img/icon.ico",
-            "setupIcon": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.ico"
-          }
-        },
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
@@ -71,8 +62,29 @@
           ]
         },
         {
+          "name": "@davidwinter/electron-forge-maker-snap",
+          "oldname": "@electron-forge/maker-snap",
+          "config": {
+            "name": "rts-em",
+            "confinement": "strict",
+            "executableName": "pledger"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "RTS-Encryption-Manager",
+            "exe": "RTS-EM.exe",
+            "description": "Simple and Portable Key Management Software",
+            "loadingGif": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/245.gif",
+            "iconUrl": "https://raw.githubusercontent.com/Tech-Slayers/RTS-Encryption-Manager/dev/renderer/img/icon.ico",
+            "setupIcon": "/a/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.ico"
+          }
+        },
+        {
           "name": "@electron-forge/maker-dmg",
           "config": {
+            "sign": false,
             "title": "RTS Encryption Manager",
             "icon": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/icon.icns",
             "background": "/Users/runner/work/RTS-Encryption-Manager/RTS-Encryption-Manager/renderer/img/background@2x.png",
