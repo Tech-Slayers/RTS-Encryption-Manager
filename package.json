@@ -19,7 +19,8 @@
     "makea": "electron-forge make --platform darwin && electron-forge make --platform linux && electron-forge make --platform win32",
     "makem": "electron-forge make --platform mas",
     "makew32": "electron-forge make --platform win32 --arch ia32",
-    "appimage": "electron-builder --linux AppImage -p never",
+    "appimage:build": "electron-builder --linux AppImage -p never",
+    "appimage:publish": "electron-builder --linux AppImage -p onTag",
     "publish": "electron-forge publish"
   },
   "devDependencies": {
