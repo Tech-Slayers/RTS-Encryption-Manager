@@ -17,10 +17,10 @@ jobs:
       run: npm install
     - name: package
       run: npm run package
-      env:
-        SNAPCRAFT_BUILD_ENVIRONMENT: host
     - name: build
       run: npm run make
+      env:
+        SNAPCRAFT_BUILD_ENVIRONMENT: host
   build_on_mac:
     runs-on: macos-latest
     steps:
