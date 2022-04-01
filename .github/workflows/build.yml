@@ -16,7 +16,7 @@ jobs:
     - name: build deb & rpm
       run: npm run make
     - name: build snap
-      run: npm run appimage
+      run: npm run appimage:build
   build_on_mac:
     runs-on: macos-latest
     steps:
