@@ -201,4 +201,4 @@ ${debugInfo()}`;
   },
 ]);
 
-Menu.setApplicationMenu(menuTemplate); 
+Menu.setApplicationMenu(menuTemplate);

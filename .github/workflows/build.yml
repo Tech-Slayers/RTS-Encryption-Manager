@@ -6,10 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Install snapcraft
-      run: |-
-        sudo snap install snapcraft --classic
-        sudo snap install review-tools
     - uses: actions/setup-node@master
       with:
         node-version: 14
@@ -17,10 +13,10 @@ jobs:
       run: npm install
     - name: package
       run: npm run package
-    - name: build
+    - name: build deb & rpm
       run: npm run make
-      env:
-        SNAPCRAFT_BUILD_ENVIRONMENT: host
+    - name: build snap
+      run: npm run appimage
   build_on_mac:
     runs-on: macos-latest
     steps:

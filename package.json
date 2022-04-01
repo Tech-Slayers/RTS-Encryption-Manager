@@ -19,18 +19,18 @@
     "makea": "electron-forge make --platform darwin && electron-forge make --platform linux && electron-forge make --platform win32",
     "makem": "electron-forge make --platform mas",
     "makew32": "electron-forge make --platform win32 --arch ia32",
+    "appimage": "electron-builder --linux AppImage",
     "publish": "electron-forge publish"
   },
   "devDependencies": {
-    "@davidwinter/electron-forge-maker-snap": "^0.7.1",
     "@electron-forge/cli": "^6.0.0-beta.54",
     "@electron-forge/maker-deb": "^6.0.0-beta.54",
     "@electron-forge/maker-dmg": "^6.0.0-beta.54",
     "@electron-forge/maker-rpm": "^6.0.0-beta.54",
-    "@electron-forge/maker-snap": "^6.0.0-beta.54",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron-forge/publisher-github": "^6.0.0-beta.54",
+    "electron-builder": "^22.14.13",
     "electron": "^12.0.0"
   },
   "dependencies": {
@@ -44,6 +44,17 @@
     "openpgp": "5.0.0-1",
     "popper.js": "^1.16.1",
     "update-electron-app": "^2.0.1"
+  },
+  "build": {
+    "productName": "rts-em",
+    "appId": "com.techslayers.rts-em",
+    "directories": {
+      "output": "dist"
+    },
+    "linux": {
+      "category": "utility",
+      "icon": "./renderer/img/icon"
+    }
   },
   "config": {
     "forge": {
@@ -60,15 +71,6 @@
           "platforms": [
             "darwin"
           ]
-        },
-        {
-          "name": "@davidwinter/electron-forge-maker-snap",
-          "oldname": "@electron-forge/maker-snap",
-          "config": {
-            "name": "rts-em",
-            "confinement": "strict",
-            "executableName": "pledger"
-          }
         },
         {
           "name": "@electron-forge/maker-squirrel",
