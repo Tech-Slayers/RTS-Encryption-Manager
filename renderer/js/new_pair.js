@@ -26,21 +26,32 @@ $("#SEF-cancel-btn").on("click", function () {
 
 $("#btn-generate-key").on("click", function (e) {
   e.preventDefault();
-  const passphrase = $("#txt-passphrase").val();
   const userName = $("#txt-full-name").val();
   const userEmail = $("#txt-email").val();
+  const passphrase = $("#txt-passphrase").val();
   const keyType = $("input[name='key-type']:checked").val();
+  if (userName.length == 0) {
+    $("#txt-full-name").addClass("is-invalid")
+  } else if (userName.length > 0) {
+    $("#txt-full-name").removeClass("is-invalid")
+  }
   if (userEmail.length == 0) {
-    console.log("nothing")
+    $("#txt-email").addClass("is-invalid")
   } else if (userEmail.length >= 1) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (userEmail.match(mailformat)) {
-      console.log("matches")
+      $("#txt-email").removeClass("is-invalid")
     } else {
-      console.log("does not match")
       $("#txt-email").addClass("is-invalid")
-      return;
     }
+  }
+  if (passphrase.length == 0) {
+    $("#txt-passphrase").addClass("is-invalid")
+  } else if (passphrase.length > 0) {
+    $("#txt-passphrase").removeClass("is-invalid")
+  }
+  if ($("#txt-full-name").hasClass("is-invalid") || $("#txt-email").hasClass("is-invalid") || $("#txt-passphrase").hasClass("is-invalid")) {
+    return
   }
   if (keyType == "ecc") {
     window.api.key

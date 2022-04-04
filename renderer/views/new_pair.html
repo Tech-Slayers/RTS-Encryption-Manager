@@ -32,7 +32,7 @@
               name="full-name"
               id="txt-full-name"
               placeholder="FirstLast"
-            /><br />
+            /><div class="invalid-feedback">Invalid Name</div><br />
             <label for="txt-email"class="form-label">Please enter email: </label>
             <input class="form-control"
               type="email"
@@ -45,7 +45,7 @@
               type="password"
               id="txt-passphrase"
               placeholder="Secured Key Password"
-            /><br />
+            /><div class="invalid-feedback">Invalid Password</div><br />
             <div class="form-check form-check-inline">
               <input checked class="form-check-input" type="radio" name='key-type' id="rad-ECC" value="ecc">
               <label class="form-check-label" for="rad-ECC">ECC</label>
