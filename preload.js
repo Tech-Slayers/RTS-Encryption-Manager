@@ -76,6 +76,9 @@ contextBridge.exposeInMainWorld("api", {
   downloadPrivateKey: (keyFile) => {
     return ipcRenderer.invoke("app:download-private-key", keyFile);
   },
+  deleteKeys: (keyFile) => {
+    return ipcRenderer.invoke("app:delete-keys", keyFile);
+  },
   reloadKeys: () => {
     return ipcRenderer.sendTo(1, "data:reload-keys");
   },

@@ -30,6 +30,7 @@ $("#export-btn-main").on("click", function () {
 
 $("#processing_local").removeAttr("style").hide();
 $("#processing_internal").removeAttr("style").hide();
+$("#btn-delete-keys").removeAttr("style").hide();
 
 $("#vpn-btn-main").on("click", function () {
   var apiKey = $.trim($("#txt-api-key-internal").val());
@@ -100,13 +101,6 @@ $("#tablesearch").keyup(function () {
   }
 });
 
-
-
-
-
-
-
-
 $("#sel-keys")
   .on("change", () => {
     const keyFile =
@@ -115,6 +109,7 @@ $("#sel-keys")
       $("#txt-key-id").text("Key information");
       $("#txt-key-email").text(null);
       $("#txt-key-fp").text(null);
+      $("#btn-delete-keys").removeAttr("style").hide();
       return;
     }
     console.log(keyFile);
@@ -139,7 +134,31 @@ $("#sel-keys")
         $("#txt-key-fp").text(fpr.slice(0, 4) + ' ' + fpr.slice(4, 8) + ' ' + fpr.slice(8, 12) + ' ' + fpr.slice(12, 16) + ' ' + fpr.slice(16, 20) + ' ' + fpr.slice(20, 24) + ' ' + fpr.slice(24, 28) + ' ' + fpr.slice(28, 32) + ' ' + fpr.slice(32, 36) + ' ' + fpr.slice(36));
       })
       .catch(alert);
+
+    $("#btn-delete-keys").show();
   });
+
+$("#btn-delete-keys").on("click", (e) => {
+  const keyFile = savedKeys.find((key) => key.name == $("#sel-keys").val());
+  if (!keyFile) {
+    alert("Please select a key pair from list");
+    return;
+  }
+  window.api
+    .deleteKeys(keyFile.name)
+    .then((response) => {
+      if (response == 1) {
+        console.log('passed');
+        window.location.reload();
+      } else if (response == 0) {
+        console.log('failed');
+      } else {
+        console.log("no idea what happened");
+        console.log(response);
+      }
+    })
+    .catch(alert);
+});
 
 $("#btn-export-key").on("click", (e) => {
   e.preventDefault();

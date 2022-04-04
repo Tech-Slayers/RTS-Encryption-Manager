@@ -125,6 +125,10 @@ ipcMain.handle("app:download-public-key", (event, private) => {
 ipcMain.handle("app:download-private-key", (event, private) => {
   io.downloadPrivateKey(private);
 });
+//
+ipcMain.handle("app:delete-keys", (event, keyFile) => {
+  return io.deleteKeys(keyFile);
+});
 
 const menuTemplate = Menu.buildFromTemplate([
   {

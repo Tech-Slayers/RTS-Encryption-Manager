@@ -1,4 +1,4 @@
-const { app, dialog } = require("electron");
+const { app, dialog, browserWindow } = require("electron");
 const fs = require("fs-extra");
 const path = require("path");
 var AdmZip = require("adm-zip");
@@ -464,6 +464,64 @@ exports.findPublicKey2 = (privateKeyName) => {
     console.log(err);
     dialog.showErrorBox("app", "Unable to find public key file.");
   }
+};
+
+exports.deleteKeys = (privateKeyName) => {
+  console.log("got the task")
+  const files = fs.readdirSync(keysDir);
+  const publicKeyFile = files.find((filename) => {
+    const nameElements = privateKeyName.split("-").pop();
+    const publicName = nameElements.startsWith("private")
+      ? privateKeyName.replace("private", "public")
+      : nameElements.startsWith("pvt")
+      ? privateKeyName.replace("pvt", "pub")
+      : privateKeyName;
+    return publicName == filename;
+  });
+  const privateKeyFile = files.find((filename) => {
+    const nameElements = privateKeyName.split("-").pop();
+    const privateName = nameElements.startsWith("private")
+      ? privateKeyName.replace("private", "private")
+      : nameElements.startsWith("pvt")
+      ? privateKeyName.replace("pvt", "pvt")
+      : privateKeyName;
+    return privateName == filename;
+  });
+  const pubfilePath = path.resolve(keysDir, publicKeyFile);
+  console.log("pub path "+pubfilePath)
+  const pvtfilePath = path.resolve(keysDir, privateKeyFile);
+  console.log("pvt path "+pvtfilePath)
+  let options  = {
+    type: 'question',
+    buttons: ['Yes', 'No'],
+    defaultId: 1,
+    title: 'Question',
+    message: "Do you really want to delete this key pair?",
+    detail: 'This can not be undone!'
+  }
+  let response = dialog.showMessageBox(options)
+    .then((res) => {
+    console.log(res)
+    if (res.response === 0) {
+     //Yes button pressed
+      console.log("yes selected")
+      if (fs.existsSync(pubfilePath)) {
+        fs.unlinkSync(pubfilePath);
+      }
+      if (fs.existsSync(pvtfilePath)) {
+        fs.unlinkSync(pvtfilePath);
+      }
+      return 1;
+    } else if (res.response === 1) {
+     //No button pressed
+      console.log("no selected")
+      return 0;
+    }
+  }).catch((err) => {
+    console.log(err);
+    dialog.showErrorBox("app", "Unable to find key files.");
+  });
+  return response
 };
 
 exports.downloadPublicKey = (privateKeyName) => {
