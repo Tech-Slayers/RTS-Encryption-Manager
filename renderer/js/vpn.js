@@ -10,7 +10,7 @@ $("#processing").removeAttr("style").hide();
 
 $("#OpenVPN").removeAttr("style").hide();
 $("#IPSec").removeAttr("style").hide();
-// $("#btn-gen-zip").removeAttr("style").hide();
+$("#btn-gen-zip").removeAttr("style").hide();
 
 
 $(document).ready(function(){
@@ -18,14 +18,17 @@ $(document).ready(function(){
     if ( this.value == 'ovpn') {
       $("#IPSec").removeAttr("style").hide();
       $("#OpenVPN").show();
+      $("#btn-gen-zip").show();
       console.log("OpenVPN selected")
     } else if( this.value == 'ipsec') {
       $("#OpenVPN").removeAttr("style").hide();
       $("#IPSec").show();
+      $("#btn-gen-zip").show();
       console.log("IPSec selected")
     } else {
       $("#OpenVPN").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
+      $("#btn-gen-zip").removeAttr("style").hide();
       console.log("Nothing selected")
     }
   });
@@ -135,7 +138,7 @@ $("#btn-gen-zip").on("click", function (e) {
     window.api
       .findPublicKey2(keyFile.name)
       .then((k) => {
-        console.log(k);
+        //console.log(k);
         if ($("#vpnSelect").val() == "ovpn") {
           encryptWithKey3(k);
           const element = document.createElement("a");
@@ -202,13 +205,13 @@ function encryptWithKey3(keyFile) {
   let vpns = $("#vpnSelect").val();
   console.log(vpns)
   let option1 = $("#ovpn-un").val();
-  console.log(option1)
+  //console.log(option1)
   let option2 = $("#ovpn-pw").val();
-  console.log(option2)
+  //console.log(option2)
   let option3 = $("#ovpn-pp").val();
-  console.log(option3)
+  //console.log(option3)
   let option4 = $("#ovpn-config").val();
-  console.log(option4)
+  //console.log(option4)
   var validating = false;
 
   if (!keyFile) {
@@ -245,13 +248,13 @@ function encryptWithKey2(keyFile) {
   let vpns = $("#vpnSelect").val();
   console.log(vpns)
   let option1 = $("#ipsec-un").val();
-  console.log(option1)
+  //console.log(option1)
   let option2 = $("#ipsec-pw").val();
-  console.log(option2)
+  //console.log(option2)
   let option3 = $("#ipsec-psk").val();
-  console.log(option3)
+  //console.log(option3)
   let option4 = $("#ipsec-ip").val();
-  console.log(option4)
+  //console.log(option4)
   var validating = false;
 
   if (!keyFile) {
