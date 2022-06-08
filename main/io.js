@@ -101,7 +101,7 @@ exports.decryptFile = (keyFilePath, isBinary, passphrase, fileEncrypted) => {
         })
 };
 
-exports.addVpn = (vpns, username, password, input1, input2, path, type) => {
+exports.addVpn = (vpns, input1, input2, input3, input4, input5, input6, path, type) => {
   let lastEncryptedMessage;
   var zipName = "config.zip"
   var zipLoc = tsDir
@@ -109,11 +109,15 @@ exports.addVpn = (vpns, username, password, input1, input2, path, type) => {
   var nl = "\n"
   if (vpns == "ovpn") {
     var block = "[ovpn]"
-    var com = username+block+password+block+input1+nl+input2
+    var com = input1+block+input2+block+input3+nl+input4
   }
   if (vpns == "ipsec") {
     var block = "[ipsec]"
-    var com = username+block+password+block+input1+block+input2
+    var com = input1+block+input2+block+input3+block+input4
+  }
+  if (vpns == "wg") {
+    var block = "[wg]"
+    var com = input1+block+input2+block+input3+block+input4+block+input5+block+input6
   }
   var zip = new AdmZip();
   zip.addFile("config.txt", Buffer.from(com, "utf8"), "");

@@ -28,8 +28,8 @@ contextBridge.exposeInMainWorld("api", {
   writeKey: (name, private, public) => {
     return ipcRenderer.invoke("app:on-key-add", name, private, public);
   },
-  writeVpn: (vpns, username, password, input1, input2, path, type) => {
-    return ipcRenderer.invoke("app:on-vpn-add", vpns, username, password, input1, input2, path, type);
+  writeVpn: (vpns, input1, input2, input3, input4, input5, input6, path, type) => {
+    return ipcRenderer.invoke("app:on-vpn-add", vpns, input1, input2, input3, input4, input5, input6, path, type);
   },
   writeSsh: (username, password, ip, key, path, type) => {
     return ipcRenderer.invoke("app:on-ssh-add", username, password, ip, key, path, type);

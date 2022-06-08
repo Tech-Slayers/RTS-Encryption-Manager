@@ -31,6 +31,7 @@
             <option selected>VPN Type...</option>
             <option value="ovpn">OpenVPN</option>
             <option value="ipsec">IPSec</option>
+            <option value="wg">WireGuard</option>
           </select>
           <hr>
           <div id="OpenVPN">
@@ -106,6 +107,55 @@
               id="ipsec-ip"
               placeholder="IPSec IP"
               required
+            /><br /><br />
+            <!-- <div>
+              <button class="btn btn-primary btn-lg" id="btn-gen-zip">Generate & Save Config</button>
+            </div> -->
+          </div>
+          <div id="WireGuard">
+            <label for="wg-pubkey" class="form-label">Please enter your WireGuard Public Key: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="wg-pubkey"
+              placeholder="WireGuard Public Key"
+              autofocus
+            /><br />
+            <label for="wg-pvtkey" class="form-label">Please enter your WireGuard Private Key: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="wg-pvtkey"
+              placeholder="WireGuard Private Key"
+              autofocus
+            /><br />
+            <label for="wg-ep-ip" class="form-label">Please enter your WireGuard Endpoint IP: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="wg-ep-ip"
+              placeholder="WireGuard Endpoint IP"
+            /><br />
+            <label for="wg-ep-p" class="form-label">Please enter your WireGuard Endpoint Port: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="wg-ep-p"
+              placeholder="WireGuard Endpoint Port"
+            /><br />
+            <label for="wg-pskey" class="form-label">Please enter your WireGuard Pre Shared Key: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="wg-pskey"
+              placeholder="WireGuard Pre Shared Key"
+            /><br />
+            <label for="wg-l-ip" class="form-label">Please enter your WireGuard Local IP: </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="wg-l-ip"
+              placeholder="WireGuard Local IP"
             /><br /><br />
             <!-- <div>
               <button class="btn btn-primary btn-lg" id="btn-gen-zip">Generate & Save Config</button>

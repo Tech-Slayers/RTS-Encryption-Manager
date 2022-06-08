@@ -10,6 +10,7 @@ $("#processing").removeAttr("style").hide();
 
 $("#OpenVPN").removeAttr("style").hide();
 $("#IPSec").removeAttr("style").hide();
+$("#WireGuard").removeAttr("style").hide();
 $("#btn-gen-zip").removeAttr("style").hide();
 
 
@@ -17,17 +18,26 @@ $(document).ready(function(){
   $('#vpnSelect').on('change', function() {
     if ( this.value == 'ovpn') {
       $("#IPSec").removeAttr("style").hide();
+      $("#WireGuard").removeAttr("style").hide();
       $("#OpenVPN").show();
       $("#btn-gen-zip").show();
       console.log("OpenVPN selected")
     } else if( this.value == 'ipsec') {
       $("#OpenVPN").removeAttr("style").hide();
+      $("#WireGuard").removeAttr("style").hide();
       $("#IPSec").show();
       $("#btn-gen-zip").show();
       console.log("IPSec selected")
+    } else if( this.value == 'wg') {
+      $("#OpenVPN").removeAttr("style").hide();
+      $("#IPSec").removeAttr("style").hide();
+      $("#WireGuard").show();
+      $("#btn-gen-zip").show();
+      console.log("WireGuard selected")
     } else {
       $("#OpenVPN").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
+      $("#WireGuard").removeAttr("style").hide();
       $("#btn-gen-zip").removeAttr("style").hide();
       console.log("Nothing selected")
     }
@@ -147,6 +157,10 @@ $("#btn-gen-zip").on("click", function (e) {
           encryptWithKey2(k);
           const element = document.createElement("a");
           element.focus();
+        } else if ($("#vpnSelect").val() == "wg") {
+          encryptWithKey4(k);
+          const element = document.createElement("a");
+          element.focus();
         } else {
           alert("VPN Type not found");
           return;
@@ -160,6 +174,10 @@ $("#btn-gen-zip").on("click", function (e) {
       element.focus();
     } else if ($("#vpnSelect").val() == "ipsec") {
       encryptWithKey2(keyFile);
+      const element = document.createElement("a");
+      element.focus();
+    } else if ($("#vpnSelect").val() == "wg") {
+      encryptWithKey4(keyFile);
       const element = document.createElement("a");
       element.focus();
     } else {
@@ -201,6 +219,42 @@ $("#btn-save-enc").on("click", function (e) {
   element.click();
 });
 
+function encryptWithKey4(keyFile) {
+  let vpns = $("#vpnSelect").val();
+  console.log(vpns)
+  let option1 = $("#wg-pubkey").val();
+  //console.log(option1)
+  let option2 = $("#wg-pvtkey").val();
+  //console.log(option2)
+  let option3 = $("#wg-ep-ip").val();
+  //console.log(option3)
+  let option4 = $("#wg-ep-p").val();
+  //console.log(option4)
+  let option5 = $("#wg-pskey").val();
+  //console.log(option5)
+  let option6 = $("#wg-l-ip").val();
+  //console.log(option6)
+  var validating = false;
+
+  if (!keyFile) {
+    alert("Please select a public key from list or import from file");
+    return;
+  }
+  console.log(keyFile);
+
+  const keyType = getKeyType(keyFile);
+  if (keyType < 0) {
+    alert(
+      "Unknown key file format. Please use *.key for binary or *.asc for armored ASCII"
+    );
+    return;
+  }
+
+  window.api
+  .writeVpn(vpns, option1, option2, option3, option4, option5, option6, keyFile.path, keyType == 0)
+  .catch(alert);
+}
+
 function encryptWithKey3(keyFile) {
   let vpns = $("#vpnSelect").val();
   console.log(vpns)
@@ -212,6 +266,10 @@ function encryptWithKey3(keyFile) {
   //console.log(option3)
   let option4 = $("#ovpn-config").val();
   //console.log(option4)
+  let option5 = "";
+  //console.log(option5)
+  let option6 = "";
+  //console.log(option6)
   var validating = false;
 
   if (!keyFile) {
@@ -240,7 +298,7 @@ function encryptWithKey3(keyFile) {
   }
 
   window.api
-  .writeVpn(vpns, option1, option2, option3, option4, keyFile.path, keyType == 0)
+  .writeVpn(vpns, option1, option2, option3, option4, option5, option6, keyFile.path, keyType == 0)
   .catch(alert);
 }
 
@@ -255,6 +313,10 @@ function encryptWithKey2(keyFile) {
   //console.log(option3)
   let option4 = $("#ipsec-ip").val();
   //console.log(option4)
+  let option5 = "";
+  //console.log(option5)
+  let option6 = "";
+  //console.log(option6)
   var validating = false;
 
   if (!keyFile) {
@@ -313,7 +375,7 @@ function encryptWithKey2(keyFile) {
   }
 
   window.api
-  .writeVpn(vpns, option1, option2, option3, option4, keyFile.path, keyType == 0)
+  .writeVpn(vpns, option1, option2, option3, option4, option5, option6, keyFile.path, keyType == 0)
   .catch(alert);
 }
 
