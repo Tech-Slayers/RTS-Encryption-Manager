@@ -329,9 +329,9 @@ function encryptWithKey3(keyFile) {
   //console.log(option1)
   let option2 = $("#ovpn-pw").val();
   //console.log(option2)
-  let option3 = $("#ovpn-pp").val();
+  let option3 = $("#ovpn-config").val();
   //console.log(option3)
-  let option4 = $("#ovpn-config").val();
+  let option4 = "";
   //console.log(option4)
   let option5 = "";
   //console.log(option5)
@@ -353,7 +353,7 @@ function encryptWithKey3(keyFile) {
     return;
   }
 
-  if (option4 == "") {
+  if (option3 == "") {
     alert(
       "Config is required"
     );
