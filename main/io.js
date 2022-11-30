@@ -108,7 +108,11 @@ exports.addVpn = (vpns, input1, input2, input3, input4, input5, input6, path, ty
   var zipWrite = (zipLoc + "\\" + zipName);
   var nl = "\n"
   if (vpns == "ovpn") {
-    var block = "[ovpn]"
+    var block = nl
+    var com = input1+block+input2+block+input3+nl+input4
+  }
+  if (vpns == "pritunl") {
+    var block = "[pritunl]"
     var com = input1+block+input2+block+input3+nl+input4
   }
   if (vpns == "ipsec") {

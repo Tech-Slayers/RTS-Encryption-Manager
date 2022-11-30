@@ -9,6 +9,7 @@ $("#processing").removeAttr("style").hide();
 
 
 $("#OpenVPN").removeAttr("style").hide();
+$("#Pritunl").removeAttr("style").hide();
 $("#IPSec").removeAttr("style").hide();
 $("#WireGuard").removeAttr("style").hide();
 $("#btn-gen-zip").removeAttr("style").hide();
@@ -17,25 +18,36 @@ $("#btn-gen-zip").removeAttr("style").hide();
 $(document).ready(function(){
   $('#vpnSelect').on('change', function() {
     if ( this.value == 'ovpn') {
+      $("#Pritunl").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
       $("#OpenVPN").show();
       $("#btn-gen-zip").show();
       console.log("OpenVPN selected")
+    } else if( this.value == 'pritunl') {
+      $("#OpenVPN").removeAttr("style").hide();
+      $("#IPSec").removeAttr("style").hide();
+      $("#WireGuard").removeAttr("style").hide();
+      $("#Pritunl").show();
+      $("#btn-gen-zip").show();
+      console.log("Pritunl selected")
     } else if( this.value == 'ipsec') {
       $("#OpenVPN").removeAttr("style").hide();
+      $("#Pritunl").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
       $("#IPSec").show();
       $("#btn-gen-zip").show();
       console.log("IPSec selected")
     } else if( this.value == 'wg') {
       $("#OpenVPN").removeAttr("style").hide();
+      $("#Pritunl").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").show();
       $("#btn-gen-zip").show();
       console.log("WireGuard selected")
     } else {
       $("#OpenVPN").removeAttr("style").hide();
+      $("#Pritunl").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
       $("#btn-gen-zip").removeAttr("style").hide();
@@ -153,6 +165,10 @@ $("#btn-gen-zip").on("click", function (e) {
           encryptWithKey3(k);
           const element = document.createElement("a");
           element.focus();
+        } else if ($("#vpnSelect").val() == "pritunl") {
+          encryptWithKey5(k);
+          const element = document.createElement("a");
+          element.focus();
         } else if ($("#vpnSelect").val() == "ipsec") {
           encryptWithKey2(k);
           const element = document.createElement("a");
@@ -170,6 +186,10 @@ $("#btn-gen-zip").on("click", function (e) {
   } else {
     if ($("#vpnSelect").val() == "ovpn") {
       encryptWithKey3(keyFile);
+      const element = document.createElement("a");
+      element.focus();
+    } else if ($("#vpnSelect").val() == "pritunl") {
+      encryptWithKey5(keyFile);
       const element = document.createElement("a");
       element.focus();
     } else if ($("#vpnSelect").val() == "ipsec") {
@@ -218,6 +238,53 @@ $("#btn-save-enc").on("click", function (e) {
   element.download = lastEncryptedMessage.path ?? "EncryptedConfig.zip.gpg";
   element.click();
 });
+
+function encryptWithKey5(keyFile) {
+  let vpns = $("#vpnSelect").val();
+  console.log(vpns)
+  let option1 = $("#pritunl-un").val();
+  //console.log(option1)
+  let option2 = $("#pritunl-pw").val();
+  //console.log(option2)
+  let option3 = $("#pritunl-pp").val();
+  //console.log(option3)
+  let option4 = $("#pritunl-config").val();
+  //console.log(option4)
+  let option5 = "";
+  //console.log(option5)
+  let option6 = "";
+  //console.log(option6)
+  var validating = false;
+
+  if (!keyFile) {
+    alert("Please select a public key from list or import from file");
+    return;
+  }
+  console.log(keyFile);
+
+  const keyType = getKeyType(keyFile);
+  if (keyType < 0) {
+    alert(
+      "Unknown key file format. Please use *.key for binary or *.asc for armored ASCII"
+    );
+    return;
+  }
+
+  if (option4 == "") {
+    alert(
+      "Config is required"
+    );
+    setTimeout(function(){
+      $("#pritunl-config").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
+  window.api
+  .writeVpn(vpns, option1, option2, option3, option4, option5, option6, keyFile.path, keyType == 0)
+  .catch(alert);
+}
 
 function encryptWithKey4(keyFile) {
   let vpns = $("#vpnSelect").val();

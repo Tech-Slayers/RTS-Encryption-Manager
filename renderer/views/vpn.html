@@ -30,6 +30,7 @@
           <select class="form-select" id="vpnSelect">
             <option selected>VPN Type...</option>
             <option value="ovpn">OpenVPN</option>
+            <option value="pritunl">Pritunl</option>
             <option value="ipsec">IPSec</option>
             <option value="wg">WireGuard</option>
           </select>
@@ -65,6 +66,46 @@
               rows="5"
               cols="30"
               id="ovpn-config"
+              placeholder="VPN Config"
+              autofocus
+              required
+            ></textarea>
+            <br /><br />
+            <!-- <div>
+              <button class="btn btn-primary btn-lg" id="btn-gen-zip">Generate & Save Config</button>
+            </div> -->
+          </div>
+          <div id="Pritunl">
+            <label for="pritunl-un" class="form-label">Please enter your vpn username (optional): </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="pritunl-un"
+              placeholder="Pritunl Username"
+              required
+            /><br />
+            <label for="pritunl-pw" class="form-label">Please enter your vpn password (optional): </label>
+            <input class="form-control"
+              type="password"
+              name="full-name"
+              id="pritunl-pw"
+              placeholder="Pritunl Password"
+              required
+            /><br />
+            <label for="pritunl-pp" class="form-label">Please enter your private key passphrase (optional): </label>
+            <input class="form-control"
+              type="password"
+              name="full-name"
+              id="pritunl-pp"
+              placeholder="Pritunl Private Key Passphrase"
+              required
+            /><br />
+            <label for="pritunl-config">Please paste your vpn config (required): </label><br />
+            <textarea 
+              class="form-control"
+              rows="5"
+              cols="30"
+              id="pritunl-config"
               placeholder="VPN Config"
               autofocus
               required
