@@ -8,7 +8,8 @@ $("#pw").removeAttr("style").hide();
 $("#processing").removeAttr("style").hide();
 
 
-$("#OpenVPN").removeAttr("style").hide();
+$("#OpenVPN1").removeAttr("style").hide();
+$("#OpenVPN2").removeAttr("style").hide();
 $("#Pritunl").removeAttr("style").hide();
 $("#IPSec").removeAttr("style").hide();
 $("#WireGuard").removeAttr("style").hide();
@@ -17,36 +18,49 @@ $("#btn-gen-zip").removeAttr("style").hide();
 
 $(document).ready(function(){
   $('#vpnSelect').on('change', function() {
-    if ( this.value == 'ovpn') {
+    if ( this.value == 'ovpn1') {
+      $("#OpenVPN2").removeAttr("style").hide();
       $("#Pritunl").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
-      $("#OpenVPN").show();
+      $("#OpenVPN1").show();
       $("#btn-gen-zip").show();
-      console.log("OpenVPN selected")
+      console.log("OpenVPN1 selected")
+    } else if ( this.value == 'ovpn2') {
+      $("#OpenVPN1").removeAttr("style").hide();
+      $("#Pritunl").removeAttr("style").hide();
+      $("#IPSec").removeAttr("style").hide();
+      $("#WireGuard").removeAttr("style").hide();
+      $("#OpenVPN2").show();
+      $("#btn-gen-zip").show();
+      console.log("OpenVPN2 selected")
     } else if( this.value == 'pritunl') {
-      $("#OpenVPN").removeAttr("style").hide();
+      $("#OpenVPN1").removeAttr("style").hide();
+      $("#OpenVPN2").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
       $("#Pritunl").show();
       $("#btn-gen-zip").show();
       console.log("Pritunl selected")
     } else if( this.value == 'ipsec') {
-      $("#OpenVPN").removeAttr("style").hide();
+      $("#OpenVPN1").removeAttr("style").hide();
+      $("#OpenVPN2").removeAttr("style").hide();
       $("#Pritunl").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
       $("#IPSec").show();
       $("#btn-gen-zip").show();
       console.log("IPSec selected")
     } else if( this.value == 'wg') {
-      $("#OpenVPN").removeAttr("style").hide();
+      $("#OpenVPN1").removeAttr("style").hide();
+      $("#OpenVPN2").removeAttr("style").hide();
       $("#Pritunl").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").show();
       $("#btn-gen-zip").show();
       console.log("WireGuard selected")
     } else {
-      $("#OpenVPN").removeAttr("style").hide();
+      $("#OpenVPN1").removeAttr("style").hide();
+      $("#OpenVPN2").removeAttr("style").hide();
       $("#Pritunl").removeAttr("style").hide();
       $("#IPSec").removeAttr("style").hide();
       $("#WireGuard").removeAttr("style").hide();
@@ -161,8 +175,12 @@ $("#btn-gen-zip").on("click", function (e) {
       .findPublicKey2(keyFile.name)
       .then((k) => {
         //console.log(k);
-        if ($("#vpnSelect").val() == "ovpn") {
+        if ($("#vpnSelect").val() == "ovpn1") {
           encryptWithKey3(k);
+          const element = document.createElement("a");
+          element.focus();
+        } else if ($("#vpnSelect").val() == "ovpn2") {
+          encryptWithKey6(k);
           const element = document.createElement("a");
           element.focus();
         } else if ($("#vpnSelect").val() == "pritunl") {
@@ -184,8 +202,12 @@ $("#btn-gen-zip").on("click", function (e) {
       })
       .catch(alert);
   } else {
-    if ($("#vpnSelect").val() == "ovpn") {
+    if ($("#vpnSelect").val() == "ovpn1") {
       encryptWithKey3(keyFile);
+      const element = document.createElement("a");
+      element.focus();
+    } else if ($("#vpnSelect").val() == "ovpn2") {
+      encryptWithKey6(keyFile);
       const element = document.createElement("a");
       element.focus();
     } else if ($("#vpnSelect").val() == "pritunl") {
@@ -238,6 +260,64 @@ $("#btn-save-enc").on("click", function (e) {
   element.download = lastEncryptedMessage.path ?? "EncryptedConfig.zip.gpg";
   element.click();
 });
+
+function encryptWithKey6(keyFile) {
+  let vpns = $("#vpnSelect").val();
+  console.log(vpns)
+  let option1 = $("#ovpn-un2").val();
+  //console.log(option1)
+  let option2 = $("#ovpn-pw2").val();
+  //console.log(option2)
+  let option3 = $("#ovpn-key2").val();
+  //console.log(option3)
+  let option4 = $("#ovpn-config2").val();
+  //console.log(option4)
+  let option5 = "";
+  //console.log(option5)
+  let option6 = "";
+  //console.log(option6)
+  var validating = false;
+
+  if (!keyFile) {
+    alert("Please select a public key from list or import from file");
+    return;
+  }
+  console.log(keyFile);
+
+  const keyType = getKeyType(keyFile);
+  if (keyType < 0) {
+    alert(
+      "Unknown key file format. Please use *.key for binary or *.asc for armored ASCII"
+    );
+    return;
+  }
+
+  if (option3 == "") {
+    alert(
+      "Certificate Password is required"
+    );
+    setTimeout(function(){
+      $("#ovpn-key2").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
+  if (option4 == "") {
+    alert(
+      "Config is required"
+    );
+    setTimeout(function(){
+      $("#ovpn-config2").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
+  window.api
+  .writeVpn(vpns, option1, option2, option3, option4, option5, option6, keyFile.path, keyType == 0)
+  .catch(alert);
+}
 
 function encryptWithKey5(keyFile) {
   let vpns = $("#vpnSelect").val();
@@ -325,11 +405,11 @@ function encryptWithKey4(keyFile) {
 function encryptWithKey3(keyFile) {
   let vpns = $("#vpnSelect").val();
   console.log(vpns)
-  let option1 = $("#ovpn-un").val();
+  let option1 = $("#ovpn-un1").val();
   //console.log(option1)
-  let option2 = $("#ovpn-pw").val();
+  let option2 = $("#ovpn-pw1").val();
   //console.log(option2)
-  let option3 = $("#ovpn-config").val();
+  let option3 = $("#ovpn-config1").val();
   //console.log(option3)
   let option4 = "";
   //console.log(option4)
@@ -353,12 +433,34 @@ function encryptWithKey3(keyFile) {
     return;
   }
 
+  if (option1 == "") {
+    alert(
+      "Username is required"
+    );
+    setTimeout(function(){
+      $("#ovpn-un1").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
+  if (option2 == "") {
+    alert(
+      "Password is required"
+    );
+    setTimeout(function(){
+      $("#ovpn-pw1").focus();
+      validating = false;
+    }, 1);
+    return;
+  }
+
   if (option3 == "") {
     alert(
       "Config is required"
     );
     setTimeout(function(){
-      $("#ovpn-config").focus();
+      $("#ovpn-config1").focus();
       validating = false;
     }, 1);
     return;

@@ -107,9 +107,15 @@ exports.addVpn = (vpns, input1, input2, input3, input4, input5, input6, path, ty
   var zipLoc = tsDir
   var zipWrite = (zipLoc + "\\" + zipName);
   var nl = "\n"
-  if (vpns == "ovpn") {
+  if (vpns == "ovpn1") {
     var block = nl
-    var com = input1+block+input2+block+input3
+    var tag = "[ovpn-auth-user-pass]"
+    var com = tag+block+input1+block+input2+block+input3
+  }
+  if (vpns == "ovpn2") {
+    var block = nl
+    var tag = "[ovpn-auth-user-pass-with-cert-key]"
+    var com = tag+block+input1+block+input2+block+input3+block+input4
   }
   if (vpns == "pritunl") {
     var block = "[pritunl]"
@@ -121,7 +127,7 @@ exports.addVpn = (vpns, input1, input2, input3, input4, input5, input6, path, ty
   }
   if (vpns == "wg") {
     var block = "[wg]"
-    var com = input1+block+input2+block+input3+block+input4+block+input5+block+input6
+    var com = input1+block+input2+block+input3+block+input4+block+input5+block+input6+block
   }
   var zip = new AdmZip();
   zip.addFile("config.txt", Buffer.from(com, "utf8"), "");

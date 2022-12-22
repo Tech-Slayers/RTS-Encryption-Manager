@@ -29,35 +29,76 @@
           <label for="vpnSelect" class="form-label mt-4">Select VPN Type</label>
           <select class="form-select" id="vpnSelect">
             <option selected>VPN Type...</option>
-            <option value="ovpn">OpenVPN</option>
+            <option value="ovpn1">OpenVPN</option>
+            <option value="ovpn2">OpenVPN w/Certificate Password</option>
             <option value="pritunl">Pritunl</option>
             <option value="ipsec">IPSec</option>
             <option value="wg">WireGuard</option>
           </select>
           <hr>
-          <div id="OpenVPN">
-            <label for="ovpn-un" class="form-label">Please enter your vpn username (optional): </label>
+          <div id="OpenVPN1">
+            <label for="ovpn-un1" class="form-label">Please enter your vpn username (required): </label>
             <input class="form-control"
               type="text"
               name="full-name"
-              id="ovpn-un"
+              id="ovpn-un1"
               placeholder="OpenVPN Username"
               required
             /><br />
-            <label for="ovpn-pw" class="form-label">Please enter your vpn password (optional): </label>
+            <label for="ovpn-pw1" class="form-label">Please enter your vpn password (required): </label>
             <input class="form-control"
               type="password"
               name="full-name"
-              id="ovpn-pw"
+              id="ovpn-pw1"
               placeholder="OpenVPN Password"
               required
             /><br />
-            <label for="ovpn-config">Please paste your vpn config (required): </label><br />
+            <label for="ovpn-config1">Please paste your vpn config (required): </label><br />
             <textarea 
               class="form-control"
               rows="5"
               cols="30"
-              id="ovpn-config"
+              id="ovpn-config1"
+              placeholder="VPN Config"
+              autofocus
+              required
+            ></textarea>
+            <br /><br />
+            <!-- <div>
+              <button class="btn btn-primary btn-lg" id="btn-gen-zip">Generate & Save Config</button>
+            </div> -->
+          </div>
+          <div id="OpenVPN2">
+            <label for="ovpn-un2" class="form-label">Please enter your vpn username (optional): </label>
+            <input class="form-control"
+              type="text"
+              name="full-name"
+              id="ovpn-un2"
+              placeholder="OpenVPN Username"
+              required
+            /><br />
+            <label for="ovpn-pw2" class="form-label">Please enter your vpn password (optional): </label>
+            <input class="form-control"
+              type="password"
+              name="full-name"
+              id="ovpn-pw2"
+              placeholder="OpenVPN Password"
+              required
+            /><br />
+            <label for="ovpn-key2" class="form-label">Please enter your vpn certificate password (required): </label>
+            <input class="form-control"
+              type="password"
+              name="full-name"
+              id="ovpn-key2"
+              placeholder="OpenVPN Certificate Password"
+              required
+            /><br />
+            <label for="ovpn-config2">Please paste your vpn config (required): </label><br />
+            <textarea 
+              class="form-control"
+              rows="5"
+              cols="30"
+              id="ovpn-config2"
               placeholder="VPN Config"
               autofocus
               required
